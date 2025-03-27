@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fotmob/screens/article_page.dart';
 import 'package:fotmob/utils/colors.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -13,7 +14,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<Widget> _pages = const [
     Scaffold(),
-    Scaffold(body: Text("data", style: TextStyle(color: AppColors.lightGray))),
+    ArticlePage(),
     Scaffold(),
     Scaffold(),
     Scaffold(),
@@ -26,10 +27,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: _buildAppBar(),
       body: _pages[_selectedIndex],
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
+
+  // AppBar _buildAppBar() {
+  //   return AppBar(backgroundColor: AppColors.darkBlackGray, );
+  // }
 
   Widget _buildBottomNavigationBar() {
     return BottomNavigationBar(
@@ -47,27 +53,27 @@ class _MyHomePageState extends State<MyHomePage> {
         BottomNavigationBarItem(
           icon: Icon(Icons.sports_soccer_outlined),
           activeIcon: Icon(Icons.sports_soccer),
-          label: 'Home',
+          label: 'Pertandingan',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.article_outlined),
           activeIcon: Icon(Icons.article),
-          label: 'Tes',
+          label: 'Berita',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.leaderboard_outlined),
-          activeIcon: Icon(Icons.leaderboard),
-          label: 'Tes',
+          icon: Icon(Icons.emoji_events_outlined),
+          activeIcon: Icon(Icons.emoji_events),
+          label: 'Liga',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.leaderboard_outlined),
-          activeIcon: Icon(Icons.leaderboard),
-          label: 'Tes',
+          icon: Icon(Icons.star_border_outlined),
+          activeIcon: Icon(Icons.star),
+          label: 'Mengikuti',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.leaderboard_outlined),
-          activeIcon: Icon(Icons.leaderboard),
-          label: 'Tes',
+          icon: Icon(Icons.menu_outlined),
+          activeIcon: Icon(Icons.menu),
+          label: 'Lainnya',
         ),
       ],
     );
