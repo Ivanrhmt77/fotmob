@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fotmob/screens/article_for_you_page.dart';
 import 'package:fotmob/screens/not_found_page.dart';
 import 'package:fotmob/utils/colors.dart';
 
@@ -13,9 +14,7 @@ class ArticlePage extends StatelessWidget {
         appBar: _buildAppBar(context),
         body: const TabBarView(
           children: [
-            Center(
-              child: Text("Konten Trending", style: TextStyle(fontSize: 18)),
-            ),
+            ArticleForYouPage(),
             NotFoundPage(),
             NotFoundPage(),
             NotFoundPage(),

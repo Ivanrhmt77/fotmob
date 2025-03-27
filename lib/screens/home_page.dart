@@ -79,7 +79,7 @@ class HomePage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: IconButton(
-        icon: Icon(icon, color: AppColors.lightGray),
+        icon: Icon(icon),
         onPressed: () => _navigateToNotFound(context),
         iconSize: 18,
       ),
