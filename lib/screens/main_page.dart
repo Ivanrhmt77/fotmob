@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fotmob/screens/article_page.dart';
+import 'package:fotmob/screens/home_page.dart';
 import 'package:fotmob/screens/not_found_page.dart';
 import 'package:fotmob/utils/colors.dart';
 
@@ -14,7 +15,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = const [
-    NotFoundPage(),
+    HomePage(),
     ArticlePage(),
     NotFoundPage(),
     NotFoundPage(),

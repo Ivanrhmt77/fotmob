@@ -29,7 +29,7 @@ class ArticlePage extends StatelessWidget {
     return AppBar(
       backgroundColor: AppColors.darkBlackGray,
       title: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -52,7 +52,7 @@ class ArticlePage extends StatelessWidget {
             tabBarTheme: const TabBarTheme(dividerColor: Colors.transparent),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             child: TabBar(
               indicatorColor: AppColors.green,
               indicatorSize: TabBarIndicatorSize.label,
