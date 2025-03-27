@@ -28,27 +28,20 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: _buildAppBar(),
       body: _pages[_selectedIndex],
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
-  // AppBar _buildAppBar() {
-  //   return AppBar(backgroundColor: AppColors.darkBlackGray, );
-  // }
-
   Widget _buildBottomNavigationBar() {
     return BottomNavigationBar(
-      type:
-          BottomNavigationBarType
-              .fixed, // Agar backgroundColor tidak transparan
+      type: BottomNavigationBarType.fixed,
       backgroundColor: AppColors.darkGray,
       currentIndex: _selectedIndex,
       selectedItemColor: AppColors.green,
       unselectedItemColor: AppColors.gray,
-      selectedLabelStyle: const TextStyle(fontSize: 12), // Ukuran tetap
-      unselectedLabelStyle: const TextStyle(fontSize: 12), // Ukuran tetap
+      selectedLabelStyle: const TextStyle(fontSize: 12),
+      unselectedLabelStyle: const TextStyle(fontSize: 12),
       onTap: _onItemTapped,
       items: const [
         BottomNavigationBarItem(
