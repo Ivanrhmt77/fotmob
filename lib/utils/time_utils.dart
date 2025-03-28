@@ -1,7 +1,6 @@
 import 'package:intl/intl.dart';
 
-String timeAgo(String dateTimeString) {
-  DateTime publishedDate = DateTime.parse(dateTimeString);
+String timeAgo(DateTime publishedDate) {
   Duration difference = DateTime.now().difference(publishedDate);
 
   if (difference.inSeconds < 60) {

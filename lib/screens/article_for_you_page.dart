@@ -1,72 +1,158 @@
 import 'package:flutter/material.dart';
+import 'package:fotmob/models/article_response.dart';
+import 'package:fotmob/services/client.dart';
 import 'package:fotmob/utils/colors.dart';
+import 'package:fotmob/utils/time_utils.dart';
 import 'package:fotmob/widgets/article_widgets.dart';
-import 'package:fotmob/screens/not_found_page.dart';
+import 'package:fotmob/screens/detail_article_page.dart';
 import 'package:fotmob/utils/slide_page_route.dart';
 
-class ArticleForYouPage extends StatelessWidget {
+class ArticleForYouPage extends StatefulWidget {
   const ArticleForYouPage({super.key});
+
+  @override
+  State<ArticleForYouPage> createState() => _ArticleForYouPageState();
+}
+
+class _ArticleForYouPageState extends State<ArticleForYouPage> {
+  List<Article> listArticle = [];
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    getListArticle();
+  }
+
+  Future<void> getListArticle() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      listArticle = await Client.fetchArticle();
+      print("Artikel berhasil dimuat: ${listArticle.length} item.");
+    } catch (e) {
+      print("Error loading articles: $e");
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(context),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
-            children: [
-              ArticleLarge(
-                imageUrl:
-                    "https://static01.nyt.com/athletic/uploads/wp/2024/08/14094915/GettyImages-2165865551-scaled.jpg",
-                title: "Menjelajahi Keindahan Alam",
-                time: "90 min · 1 jam lalu",
-                onTap: () => _navigateToNotFound(context),
-              ),
-              const SizedBox(height: 20),
-              ArticleSmall(
-                imageUrl:
-                    "https://static01.nyt.com/athletic/uploads/wp/2024/08/14094915/GettyImages-2165865551-scaled.jpg",
-                title: "Teknologi Masa Depan",
-                time: "90 min · 1 jam lalu",
-                onTap: () => _navigateToNotFound(context),
-              ),
-              const SizedBox(height: 20),
-              ArticleLarge(
-                imageUrl:
-                    "https://static01.nyt.com/athletic/uploads/wp/2024/08/14094915/GettyImages-2165865551-scaled.jpg",
-                title: "Arsitektur Modern",
-                time: "90 min · 1 jam lalu",
-                onTap: () => _navigateToNotFound(context),
-              ),
-              const SizedBox(height: 20),
-              ArticleSmall(
-                imageUrl:
-                    "https://static01.nyt.com/athletic/uploads/wp/2024/08/14094915/GettyImages-2165865551-scaled.jpg",
-                title: "Perkembangan Dunia Olahraga ",
-                time: "90 min · 1 jam lalu",
-                onTap: () => _navigateToNotFound(context),
-              ),
-            ],
-          ),
+          child:
+              isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: listArticle.length,
+                    itemBuilder: (context, index) {
+                      final article = listArticle[index];
+
+                      if (index == 0) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.trending_up,
+                                  color: AppColors.green,
+                                  size: 22,
+                                ),
+                                const SizedBox(width: 10),
+                                const Text(
+                                  "Sedang Tren",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            _buildArticleLarge(article),
+                          ],
+                        );
+                      } else if (index > 0 && index <= 4) {
+                        return _buildArticleSmall(article);
+                      } else if (index == 5) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.new_releases,
+                                  color: AppColors.green,
+                                  size: 22,
+                                ),
+                                const SizedBox(width: 10),
+                                const Text(
+                                  "Terbaru",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            _buildArticleLarge(article),
+                          ],
+                        );
+                      } else {
+                        return _buildArticleLarge(article);
+                      }
+                    },
+                  ),
         ),
       ),
     );
   }
 
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: AppColors.darkGray,
-      title: const Text("Artikel Untukmu"),
+  Widget _buildArticleLarge(Article article) {
+    return Column(
+      children: [
+        ArticleLarge(
+          imageUrl: article.urlToImage,
+          title: article.title,
+          time: timeAgo(article.publishedAt),
+          source: article.source,
+          onTap: () => _navigateToDetailArticle(context, article),
+        ),
+        const SizedBox(height: 20),
+      ],
     );
   }
 
-  void _navigateToNotFound(BuildContext context) {
+  Widget _buildArticleSmall(Article article) {
+    return Column(
+      children: [
+        ArticleSmall(
+          imageUrl: article.urlToImage,
+          title: article.title,
+          time: timeAgo(article.publishedAt),
+          source: article.source,
+          onTap: () => _navigateToDetailArticle(context, article),
+        ),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+
+  void _navigateToDetailArticle(BuildContext context, Article article) {
     Navigator.push(
       context,
       SlidePageRoute(
-        page: const NotFoundPage(),
+        page: DetailArticlePage(article: article),
         direction: AxisDirection.right,
       ),
     );

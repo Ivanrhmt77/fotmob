@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fotmob/models/article_response.dart';
 import 'package:fotmob/utils/colors.dart';
 
 class ArticleLarge extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String time;
+  final Source source;
   final VoidCallback? onTap;
 
   const ArticleLarge({
@@ -12,6 +15,7 @@ class ArticleLarge extends StatelessWidget {
     required this.imageUrl,
     required this.title,
     required this.time,
+    required this.source,
     this.onTap,
   });
 
@@ -29,11 +33,18 @@ class ArticleLarge extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  imageUrl,
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
                   width: double.infinity,
                   height: 200,
                   fit: BoxFit.cover,
+                  placeholder:
+                      (context, url) => SizedBox(
+                        width: double.infinity,
+                        height: 200,
+                        child: const Center(child: CircularProgressIndicator()),
+                      ),
+                  errorWidget: (context, url, error) => SizedBox.shrink(),
                 ),
               ),
               const SizedBox(height: 15),
@@ -47,7 +58,22 @@ class ArticleLarge extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
-              Text(time, style: TextStyle(color: AppColors.gray, fontSize: 12)),
+              Row(
+                children: [
+                  Text(
+                    source.name,
+                    style: const TextStyle(fontSize: 13, color: AppColors.gray),
+                  ),
+                  Text(
+                    " · ",
+                    style: const TextStyle(fontSize: 13, color: AppColors.gray),
+                  ),
+                  Text(
+                    time,
+                    style: const TextStyle(fontSize: 13, color: AppColors.gray),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -60,6 +86,7 @@ class ArticleSmall extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String time;
+  final Source source;
   final VoidCallback? onTap;
 
   const ArticleSmall({
@@ -67,6 +94,7 @@ class ArticleSmall extends StatelessWidget {
     required this.imageUrl,
     required this.title,
     required this.time,
+    required this.source,
     this.onTap,
   });
 
@@ -84,11 +112,18 @@ class ArticleSmall extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  imageUrl,
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
                   width: 150,
                   height: 80,
                   fit: BoxFit.cover,
+                  placeholder:
+                      (context, url) => SizedBox(
+                        width: 150,
+                        height: 80,
+                        child: const Center(child: CircularProgressIndicator()),
+                      ),
+                  errorWidget: (context, url, error) => SizedBox.shrink(),
                 ),
               ),
               const SizedBox(width: 15),
@@ -106,12 +141,30 @@ class ArticleSmall extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      time,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.gray,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          source.name,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: AppColors.gray,
+                          ),
+                        ),
+                        Text(
+                          " · ",
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: AppColors.gray,
+                          ),
+                        ),
+                        Text(
+                          time,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: AppColors.gray,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
