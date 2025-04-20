@@ -150,18 +150,19 @@ class ArticleSmall extends StatelessWidget {
                             color: AppColors.gray,
                           ),
                         ),
-                        Text(
+                        const Text(
                           " · ",
-                          style: const TextStyle(
-                            fontSize: 13,
-                            color: AppColors.gray,
-                          ),
+                          style: TextStyle(fontSize: 13, color: AppColors.gray),
                         ),
-                        Text(
-                          time,
-                          style: const TextStyle(
-                            fontSize: 13,
-                            color: AppColors.gray,
+                        Expanded(
+                          child: Text(
+                            time,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              color: AppColors.gray,
+                            ),
                           ),
                         ),
                       ],

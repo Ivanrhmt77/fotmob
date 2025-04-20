@@ -4,7 +4,7 @@ import 'package:fotmob/services/client.dart';
 import 'package:fotmob/utils/colors.dart';
 import 'package:fotmob/utils/time_utils.dart';
 import 'package:fotmob/widgets/article_widgets.dart';
-import 'package:fotmob/screens/detail_article_page.dart';
+import 'package:fotmob/screens/articles/detail_article_page.dart';
 import 'package:fotmob/utils/slide_page_route.dart';
 
 class ArticleForYouPage extends StatefulWidget {
@@ -30,7 +30,7 @@ class _ArticleForYouPageState extends State<ArticleForYouPage> {
     });
 
     try {
-      listArticle = await Client.fetchArticle("Soccer");
+      listArticle = await Client.fetchArticle("Football FIFA");
       print("Artikel berhasil dimuat: ${listArticle.length} item.");
     } catch (e) {
       print("Error loading articles: $e");

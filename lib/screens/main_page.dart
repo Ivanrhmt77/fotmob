@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fotmob/screens/article_page.dart';
+import 'package:fotmob/screens/articles/article_page.dart';
 import 'package:fotmob/screens/home_page.dart';
 import 'package:fotmob/screens/not_found_page.dart';
 import 'package:fotmob/utils/colors.dart';
