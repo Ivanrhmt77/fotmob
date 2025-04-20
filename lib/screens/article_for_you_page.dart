@@ -30,7 +30,7 @@ class _ArticleForYouPageState extends State<ArticleForYouPage> {
     });
 
     try {
-      listArticle = await Client.fetchArticle();
+      listArticle = await Client.fetchArticle("Soccer");
       print("Artikel berhasil dimuat: ${listArticle.length} item.");
     } catch (e) {
       print("Error loading articles: $e");

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fotmob/screens/article_for_you_page.dart';
+import 'package:fotmob/screens/article_latest.dart';
 import 'package:fotmob/screens/not_found_page.dart';
 import 'package:fotmob/utils/colors.dart';
 
@@ -13,7 +14,7 @@ class ArticlePage extends StatelessWidget {
       child: Scaffold(
         appBar: _buildAppBar(context),
         body: const TabBarView(
-          children: [ArticleForYouPage(), NotFoundPage(), NotFoundPage()],
+          children: [ArticleForYouPage(), ArticleLatest(), NotFoundPage()],
         ),
       ),
     );
