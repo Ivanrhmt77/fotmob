@@ -19,7 +19,6 @@ class _MyHomePageState extends State<MyHomePage> {
     ArticlePage(),
     NotFoundPage(),
     NotFoundPage(),
-    NotFoundPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -56,19 +55,14 @@ class _MyHomePageState extends State<MyHomePage> {
           label: 'Berita',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.emoji_events_outlined),
-          activeIcon: Icon(Icons.emoji_events),
-          label: 'Liga',
+          icon: Icon(Icons.location_on_outlined),
+          activeIcon: Icon(Icons.location_on),
+          label: 'Stadion',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.star_border_outlined),
           activeIcon: Icon(Icons.star),
           label: 'Mengikuti',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.menu_outlined),
-          activeIcon: Icon(Icons.menu),
-          label: 'Lainnya',
         ),
       ],
     );

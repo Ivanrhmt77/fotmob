@@ -63,7 +63,7 @@ class _ArticleForYouPageState extends State<ArticleForYouPage> {
                             Row(
                               children: [
                                 const Icon(
-                                  Icons.trending_up,
+                                  Icons.local_fire_department,
                                   color: AppColors.green,
                                   size: 22,
                                 ),
@@ -90,7 +90,34 @@ class _ArticleForYouPageState extends State<ArticleForYouPage> {
                             Row(
                               children: [
                                 const Icon(
-                                  Icons.new_releases,
+                                  Icons.people_alt,
+                                  color: AppColors.green,
+                                  size: 22,
+                                ),
+                                const SizedBox(width: 10),
+                                const Text(
+                                  "Yang anda ikuti",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            _buildArticleLarge(article),
+                          ],
+                        );
+                      } else if (index > 5 && index <= 9) {
+                        return _buildArticleSmall(article);
+                      } else if (index == 10) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.access_time_filled,
                                   color: AppColors.green,
                                   size: 22,
                                 ),

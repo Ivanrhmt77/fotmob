@@ -13,13 +13,10 @@ class DetailArticlePage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(
-            article.urlToImage,
-            fit: BoxFit.cover,
-          ), // Gambar tidak ada padding
-          const SizedBox(height: 10), // Jarak antara gambar dan teks
+          Image.network(article.urlToImage, fit: BoxFit.cover),
+          const SizedBox(height: 40),
           Padding(
-            padding: const EdgeInsets.all(10), // Padding hanya untuk teks
+            padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -30,9 +27,9 @@ class DetailArticlePage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 5),
-                Text("Published: ${article.publishedAt}"),
                 const SizedBox(height: 10),
+                Text("Published: ${article.publishedAt}"),
+                const SizedBox(height: 30),
                 Text(article.content),
               ],
             ),

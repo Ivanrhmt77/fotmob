@@ -9,16 +9,11 @@ class ArticlePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         appBar: _buildAppBar(context),
         body: const TabBarView(
-          children: [
-            ArticleForYouPage(),
-            NotFoundPage(),
-            NotFoundPage(),
-            NotFoundPage(),
-          ],
+          children: [ArticleForYouPage(), NotFoundPage(), NotFoundPage()],
         ),
       ),
     );
@@ -64,7 +59,6 @@ class ArticlePage extends StatelessWidget {
               tabs: const [
                 Tab(text: "Untuk Anda"),
                 Tab(text: "Terbaru"),
-                Tab(text: "Transfer"),
                 Tab(text: "Liga"),
               ],
             ),
