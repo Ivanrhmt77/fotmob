@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
         BottomNavigationBarItem(
           icon: Icon(Icons.location_on_outlined),
           activeIcon: Icon(Icons.location_on),
-          label: 'Stadion',
+          label: 'Stadium',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.sticky_note_2_outlined),

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:fotmob/database/maps_dummy.dart';
+import 'package:fotmob/database/maps_dummy.dart'; // Importing the correct file
+import 'package:fotmob/utils/colors.dart';
 import 'package:fotmob/utils/map_type_google.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -13,15 +14,52 @@ class MapsPage extends StatefulWidget {
 class _MapsPageState extends State<MapsPage> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
-  double latitude = -7.2804494;
-  double longitude = 112.7947228;
+  double latitude = 53.4631;
+  double longitude = -2.2913;
   var mapType = MapType.normal;
+
+  // Custom map style that ensures text is black
+  static const String _mapStyle = '''
+  [
+    {
+      "elementType": "labels.text",
+      "stylers": [
+        {
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "elementType": "labels.text.stroke",
+      "stylers": [
+        {
+          "color": "#ffffff"
+        }
+      ]
+    }
+  ]
+  ''';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Google Maps"),
+        backgroundColor: AppColors.darkBlackGray,
+        title: const Padding(
+          padding: EdgeInsets.symmetric(vertical: 20),
+          child: Text(
+            "Football Stadiums Map",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+          ),
+        ),
         actions: [
           PopupMenuButton(
             onSelected: onSelectedMapType,
@@ -36,13 +74,7 @@ class _MapsPageState extends State<MapsPage> {
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          // google maps
-          _buildGoogleMaps(),
-          _buildDetailCard(),
-        ],
-      ),
+      body: Stack(children: [_buildGoogleMaps(), _buildDetailCard()]),
     );
   }
 
@@ -51,10 +83,11 @@ class _MapsPageState extends State<MapsPage> {
       mapType: mapType,
       initialCameraPosition: CameraPosition(
         target: LatLng(latitude, longitude),
-        zoom: 14,
+        zoom: 10,
       ),
       onMapCreated: (GoogleMapController controller) {
         _controller.complete(controller);
+        controller.setMapStyle(_mapStyle);
       },
       markers: markers,
     );
@@ -77,6 +110,13 @@ class _MapsPageState extends State<MapsPage> {
           break;
       }
     });
+
+    // Re-apply the style to ensure text stays black when map type changes
+    _controller.future.then((controller) {
+      if (mapType == MapType.normal) {
+        controller.setMapStyle(_mapStyle);
+      }
+    });
   }
 
   _buildDetailCard() {
@@ -89,38 +129,45 @@ class _MapsPageState extends State<MapsPage> {
           children: [
             const SizedBox(width: 10),
             _displayPlaceCard(
-              "https://masuk-ptn.com/images/department/5bcae2a1c24dd3deebc1db0a60266744be12f999.jpeg",
-              "Politeknik Elektronika Negeri Surabaya",
-              -7.2758471,
-              112.7937557,
+              "https://static.toiimg.com/thumb/resizemode-4,width-1280,height-720,msid-118886268/118886268.jpg",
+              "Manchester United - Old Trafford",
+              53.4631,
+              -2.2913,
             ),
             const SizedBox(width: 10),
             _displayPlaceCard(
-              "https://www.its.ac.id/wp-content/uploads/2021/03/Rektorat.jpg",
-              "Institut Teknologi Sepuluh Nopember",
-              -7.282356,
-              112.7949253,
+              "https://www.mancity.com/meta/media/qlofj44a/tf_13049.jpg?width=1620",
+              "Manchester City - Etihad Stadium",
+              53.4831,
+              -2.2004,
             ),
             const SizedBox(width: 10),
             _displayPlaceCard(
-              "https://images.squarespace-cdn.com/content//5649db6ae4b08bab0a26acc4/1553496740912-3RTZAQAU8JSH93GTNHUP/CADIZ-GALAXY-MALL-3-05.jpg?format=2500w",
-              "Galaxy Mall 3",
-              -7.2756967,
-              112.7806254,
+              "https://www.terraco.com/id/wp-content/uploads/2020/12/Liverpool-Banner-2.png",
+              "Liverpool - Anfield",
+              53.4308,
+              -2.9608,
             ),
             const SizedBox(width: 10),
             _displayPlaceCard(
-              "https://bpkad.surabaya.go.id/siwagefile/images/arifrahman/convention7.jpg",
-              "Convention Hall Arief Rahman Hakim",
-              -7.2886493,
-              112.7836333,
+              "https://icdn.chelsea.news/wp-content/uploads/2023/07/stamford-bridge-redevelopment-qedsa-768x768.jpg",
+              "Chelsea - Stamford Bridge",
+              51.4816,
+              -0.1910,
             ),
             const SizedBox(width: 10),
             _displayPlaceCard(
-              "https://www.pakuwoncity.com/wp-content/uploads/2020/11/Pakuwon-City-Mall-e1604998922874.jpg",
-              "Pakuwon City Mall",
-              -7.2768784,
-              112.8061882,
+              "https://londontickets.tours/wp-content/uploads/2023/05/emirates-stadium-arsenal.jpg",
+              "Arsenal - Emirates Stadium",
+              51.5549,
+              -0.1084,
+            ),
+            const SizedBox(width: 10),
+            _displayPlaceCard(
+              "https://i.eurosport.com/2019/04/03/2557813-53054975-2560-1440.jpg",
+              "Tottenham Hotspur Stadium",
+              51.6043,
+              -0.0665,
             ),
             const SizedBox(width: 10),
           ],
@@ -167,26 +214,42 @@ class _MapsPageState extends State<MapsPage> {
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
+                        color:
+                            Colors.black, // Explicitly set text color to black
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Row(
                       children: [
-                        const Text("4.9", style: TextStyle(fontSize: 15)),
+                        const Text(
+                          "5.0",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color:
+                                Colors
+                                    .black, // Explicitly set text color to black
+                          ),
+                        ),
                         Row(children: stars()),
                       ],
                     ),
                     const Text(
-                      "Indonesia \u00B7 Kota Surabaya",
-                      style: TextStyle(color: Colors.black, fontSize: 12),
+                      "Premier League \u00B7 England",
+                      style: TextStyle(
+                        color:
+                            Colors.black, // Explicitly set text color to black
+                        fontSize: 12,
+                      ),
                       overflow: TextOverflow.ellipsis,
                     ),
                     const Expanded(
                       child: Text(
-                        "Closed \u00B7 Open 09.00 Monday",
+                        "Match days and Stadium tours",
                         style: TextStyle(
-                          color: Colors.black,
+                          color:
+                              Colors
+                                  .black, // Explicitly set text color to black
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
