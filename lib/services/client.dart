@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class Client {
   static Future<List<Article>> fetchArticle(String topic) async {
     final url =
-        "https://newsapi.org/v2/everything?q=$topic&apiKey=65f2440a57f141ba90f1b18da9fb8d8f";
+        "https://newsapi.org/v2/everything?q=$topic&apiKey=f1adb422bcf5454f9b75074e32e59bf4";
 
     final response = await http.get(Uri.parse(url));
 
