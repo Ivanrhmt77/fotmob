@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fotmob/screens/articles/article_page.dart';
 import 'package:fotmob/screens/home_page.dart';
 import 'package:fotmob/screens/not_found_page.dart';
+import 'package:fotmob/screens/notes/note_page.dart';
 import 'package:fotmob/utils/colors.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -18,7 +19,7 @@ class _MyHomePageState extends State<MyHomePage> {
     HomePage(),
     ArticlePage(),
     NotFoundPage(),
-    NotFoundPage(),
+    NotePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -60,9 +61,9 @@ class _MyHomePageState extends State<MyHomePage> {
           label: 'Stadion',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.star_border_outlined),
-          activeIcon: Icon(Icons.star),
-          label: 'Mengikuti',
+          icon: Icon(Icons.sticky_note_2_outlined),
+          activeIcon: Icon(Icons.sticky_note_2),
+          label: 'Catatan',
         ),
       ],
     );
