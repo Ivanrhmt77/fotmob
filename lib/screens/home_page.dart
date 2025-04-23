@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fotmob/screens/matches/all_matches_page.dart';
 import 'package:fotmob/screens/not_found_page.dart';
 import 'package:fotmob/utils/colors.dart';
 import 'package:fotmob/utils/slide_page_route.dart';
@@ -14,13 +15,7 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         appBar: _buildAppBar(context),
         body: const TabBarView(
-          children: [
-            Center(
-              child: Text("Konten Trending", style: TextStyle(fontSize: 18)),
-            ),
-            NotFoundPage(),
-            NotFoundPage(),
-          ],
+          children: [AllMatchesPage(), AllMatchesPage(), AllMatchesPage()],
         ),
       ),
     );
